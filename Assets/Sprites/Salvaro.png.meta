@@ -1,0 +1,143 @@
+fileFormatVersion: 2
+guid: fef3af2d5a97e6040a64234f89f76551
+timeCreated: 1444832446
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Cabeza
+    21300002: BrazoD
+    21300004: BrazoI
+    21300006: Tronco
+    21300008: PierdaD
+    21300010: PiernaI
+    21300012: PieD
+    21300014: PieI
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Cabeza
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 1113
+        width: 520
+        height: 689
+      alignment: 9
+      pivot: {x: .453273714, y: .0591865629}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BrazoD
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 650
+        width: 118
+        height: 452
+      alignment: 9
+      pivot: {x: .767685473, y: .924670756}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BrazoI
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 629
+        width: 113
+        height: 455
+      alignment: 9
+      pivot: {x: .392487913, y: .884489536}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Tronco
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 501
+        width: 448
+        height: 417
+      alignment: 9
+      pivot: {x: .445764273, y: .86708653}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PierdaD
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 92
+        width: 94
+        height: 446
+      alignment: 9
+      pivot: {x: .47415176, y: .897696674}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PiernaI
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 95
+        width: 85
+        height: 421
+      alignment: 9
+      pivot: {x: .52858454, y: .909770012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PieD
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 0
+        width: 205
+        height: 127
+      alignment: 9
+      pivot: {x: .784459829, y: .748715222}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PieI
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 0
+        width: 204
+        height: 126
+      alignment: 9
+      pivot: {x: .690569699, y: .769973576}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
