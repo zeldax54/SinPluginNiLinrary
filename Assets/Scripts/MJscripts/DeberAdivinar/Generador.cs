@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 //Espacio de nombres,  interfaces y clases que definen colecciones genéricas
 using System.Collections.Generic;
 //Libreria para hacer consulta 
 using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEngine.UI;
 
 public class Generador : MonoBehaviour
@@ -62,8 +63,8 @@ public class Generador : MonoBehaviour
      Array que contiene los datos del primer nivel
      *Respuesta,Letras aleatorias, y pista (no ayuda)
      */
-    private object[] primera = { "CALDERON", "HENGPRCOPGALDW", "Escritor de la obra " };
-    private object[] segunda = { "CERVANTES", "REDCEVXNTSILAC", "Escritor del Quijote" };
+    private object[] primera = { "LA_LOCA", "HENGPRCOPGALDW", "Escritor de la obra " };
+    private object[] segunda = { "EL_LOCO", "ELLOCOASDFG", "Escritor del Quijote" };
     private object[] tercera = { "QUEVEDO", "OGLIQCUYEWEVND", "Escritor literario del Siglo de Oro" };
 
     private List<object[]> ListaPalabras = new List<object[]>();
@@ -145,7 +146,10 @@ public class Generador : MonoBehaviour
    
 
 	private VariablesPersonaje variablesPersonaje;
-
+    //Para controlar la eliminacion de espacios 
+    private bool _boorarEspacio;
+    private bool _borrado;
+    
 
     //Iniciaiza atributos al principio del todo
     private void Awake()
@@ -232,6 +236,8 @@ public class Generador : MonoBehaviour
 
     }
 
+ 
+
 
     /*
      * Update para detectar lo que esta pasando
@@ -239,6 +245,19 @@ public class Generador : MonoBehaviour
      */
     void Update()
     {
+        //BorrarGenerar
+        _boorarEspacio = (IsInvoking("GererarDer") || IsInvoking("GenerarIzq"));
+        if (!_boorarEspacio && !_borrado )
+        {
+            var pos = GetEspacioPos(ListaPalabras[contpantallas][0].ToString());
+            DeleteCuadroEspacio(pos);
+            _borrado = true;
+        }
+       
+        
+            
+
+
         //Si hay click y el panel no esta activo
         if (Input.GetMouseButton(0) && !_modalPanel.IsActivo())
         {
@@ -513,7 +532,7 @@ public class Generador : MonoBehaviour
                 /*Avisamos lo que cuesta pedir una pista 
                  * Botones aceptar (accion poner ayuda) y cancelar.
                  */
-                _modalPanel.Elejir("Una ayuda cuesta -1DIAMANTE.Continuar?",
+                _modalPanel.Elejir("Una ayuda cuesta -1 DIAMANTE.Continuar?",
                                    PonerAyuda, aceptarButton, cancelarButton, false);//Asignar los objetos al choise con el Poner Pista que es el evento 
             }
         }
@@ -585,8 +604,7 @@ public class Generador : MonoBehaviour
      */
     public bool Check(string orden)
     {
-        return orden == arregloactual[0].ToString();
-
+        return orden == arregloactual[0].ToString().Replace("_","");
     }
 
     /*
@@ -601,6 +619,7 @@ public class Generador : MonoBehaviour
          * Compruebo las longitudes son iguales
          * para hacer las comparaciones
          */
+        respuestaa = respuestaa.Replace("_", "");
         if (actual.Length == respuestaa.Length)
         {
 
@@ -952,8 +971,8 @@ public class Generador : MonoBehaviour
 
 		GenerarIzq();
 		GenerarDer();
-		GenerarLetras();
-		
+	    GenerarLetras();
+	    _borrado = false;
 	}
 
 	
@@ -1030,17 +1049,20 @@ public class Generador : MonoBehaviour
 	 */
 	private void GenerarIzq()
 	{
-		// Pinto el cuadrado de azul y borro el exto (aqui va la respuesta
-		SpriteResp.color = Color.blue;
-		TextorResp.text = "";
-		
-		// Asigno el nombre para guiarme a la hora de resolver el asertijo(respuesta)
-		CuadroResp.name = "*" + _contizq + "i";
-		
-		// Una vez puesto los objetos en su lugar instanceo el cuadro para dibujar
-		Instantiate(CuadroResp, new Vector3(GeneradorIzq.transform.position.x + _incrementaizq, GeneradorIzq.transform.position.y),Quaternion.identity);
-		_incrementaizq += -1.75f;
-		
+        var letra = _palabra[_contizq].ToString();
+	   // Pinto el cuadrado de azul y borro el exto (aqui va la respuesta
+            SpriteResp.color = Color.blue;
+            TextorResp.text = "";
+
+            // Asigno el nombre para guiarme a la hora de resolver el asertijo(respuesta)
+            CuadroResp.name = "*" + _contizq + "i";
+
+            // Una vez puesto los objetos en su lugar instanceo el cuadro para dibujar
+            Instantiate(CuadroResp, new Vector3(GeneradorIzq.transform.position.x + _incrementaizq, GeneradorIzq.transform.position.y), Quaternion.identity);
+           
+	    
+
+        _incrementaizq += -1.75f;
 		//LLamo al mismo metodo cada 0.01 segundos 
 		Invoke("GenerarIzq", 0.01f);
 		_contizq++;// Aqui incremento cont para ir iterando por las letras
@@ -1066,16 +1088,20 @@ public class Generador : MonoBehaviour
 	 */
 	private void GenerarDer()
 	{
-		// Pinto el cuadrado de azul y borro el exto (aqui va la respuesta)
-		SpriteResp.color = Color.blue; 
-		TextorResp.text = "";
+        var letra = _palabra[_contder].ToString();
+	   
+            // Pinto el cuadrado de azul y borro el exto (aqui va la respuesta)
+            SpriteResp.color = Color.blue;
+            TextorResp.text = "";
 
-		// Asigno el nombre para guiarme a la hora de resolver el asertijo(respuesta)
-		CuadroResp.name = "*" + _contder + "d";
+            // Asigno el nombre para guiarme a la hora de resolver el asertijo(respuesta)
+            CuadroResp.name = "*" + _contder + "d";
 
-		// Una vez puesto los objetos en su lugar instanceo el cuadro para dibujar
-		Instantiate(CuadroResp, new Vector3(GeneradorDer.transform.position.x + _incrementader, GeneradorDer.transform.position.y),Quaternion.identity);
-		_incrementader += 1.75f;
+            // Una vez puesto los objetos en su lugar instanceo el cuadro para dibujar
+            Instantiate(CuadroResp, new Vector3(GeneradorDer.transform.position.x + _incrementader, GeneradorDer.transform.position.y), Quaternion.identity);
+           
+	    
+        _incrementader += 1.75f;
 
 		//LLamo al mismo metodo cada 0.01 segundos
 		Invoke("GenerarDer", 0.01f);
@@ -1090,6 +1116,7 @@ public class Generador : MonoBehaviour
 			CancelInvoke("GenerarDer");
 			
 		}
+        
 	}
 
 
@@ -1110,7 +1137,7 @@ public class Generador : MonoBehaviour
      * guiarnos en los metodos respectivos 
      * 
      */
-	#region Metodos para pistas
+	  #region Metodos para pistas
 	/*
      * Metodo que forma la palabra que esta en los
      * cuadros superiores(respuesta) eliminando las posiciones
@@ -1281,6 +1308,30 @@ public class Generador : MonoBehaviour
 		return FindObjectsOfType<GameObject>().Where(a => a.name.Contains("!"));
 	}
 	#endregion
+
+    private int GetEspacioPos(string palabra)
+    {
+        for (var i = 0; i < palabra.Count(); i++)
+        {
+            if(palabra[i]=='_')
+                return i;
+        }
+        return -1;
+    }
+
+    private void DeleteCuadroEspacio(int pos)
+    {
+        List<GameObject> cuadros =
+           FindObjectsOfType<GameObject>().Where(a => a.name.Contains("*")).OrderBy(a => a.transform.position.x).ToList();
+        for (int i = 0; i < cuadros.Count; i++)
+        {
+            if (i == pos)
+            {
+                Destroy(cuadros[i]);
+                return;
+            }
+        }
+    }
 
 }
 
